@@ -1,0 +1,269 @@
+{
+    "name": "vscode-metalgear",
+    "displayName": "VS Code Metal Gear",
+    "description": "Metal Gear Solid operatives for your VS Code",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.73.0"
+    },
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/placeholder/vscode-metalgear"
+    },
+    "publisher": "metalgear",
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "metal gear",
+        "solid snake",
+        "mgs",
+        "snake",
+        "raiden",
+        "foxhound",
+        "cardboard box",
+        "codec"
+    ],
+    "license": "MIT",
+    "icon": "icon.png",
+    "activationEvents": [
+        "onCommand:vscode-metalgear.start",
+        "onCommand:vscode-metalgear.throw-ration",
+        "onCommand:vscode-metalgear.deploy-operative",
+        "onCommand:vscode-metalgear.delete-operative",
+        "onCommand:vscode-metalgear.abort-mission",
+        "onCommand:vscode-metalgear.codec-call",
+        "onCommand:vscode-metalgear.change-location",
+        "onWebviewPanel:mgsOperatives",
+        "onView:explorer",
+        "onView:mgsView",
+        "onStartupFinished"
+    ],
+    "main": "./out/extension/extension.js",
+    "contributes": {
+        "views": {
+            "explorer": [
+                {
+                    "type": "webview",
+                    "id": "mgsView",
+                    "name": "Metal Gear",
+                    "when": "vscode-metalgear.position == 'explorer'",
+                    "icon": "media/icon/snake.svg"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "vscode-metalgear.deploy-operative",
+                    "when": "view == mgsView",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "vscode-metalgear.throw-ration",
+                    "when": "view == mgsView",
+                    "group": "navigation@2"
+                },
+                {
+                    "command": "vscode-metalgear.delete-operative",
+                    "when": "view == mgsView",
+                    "group": "navigation@3"
+                },
+                {
+                    "command": "vscode-metalgear.change-location",
+                    "when": "view == mgsView",
+                    "group": "navigation@4"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "vscode-metalgear.start",
+                "title": "Start Mission",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.throw-ration",
+                "title": "Throw Ration",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.deploy-operative",
+                "title": "Deploy Operative",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.delete-operative",
+                "title": "Extract Operative",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.abort-mission",
+                "title": "Abort Mission (Remove All)",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.codec-call",
+                "title": "Codec Call (Roll Call)",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.change-location",
+                "title": "Change Location",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.export-roster",
+                "title": "Export Operative Roster",
+                "category": "Metal Gear"
+            },
+            {
+                "command": "vscode-metalgear.import-roster",
+                "title": "Import Operative Roster",
+                "category": "Metal Gear"
+            }
+        ],
+        "configuration": [
+            {
+                "properties": {
+                    "vscode-metalgear.operativeColor": {
+                        "type": "string",
+                        "enum": [
+                            "sneaking-suit",
+                            "bandana",
+                            "tuxedo",
+                            "foxhound",
+                            "vr-mission",
+                            "snow",
+                            "desert",
+                            "normal",
+                            "cyborg",
+                            "ninja",
+                            "white-suit"
+                        ],
+                        "default": "sneaking-suit",
+                        "description": "The color/variant of your operative.",
+                        "scope": "window",
+                        "enumItemLabels": [
+                            "Sneaking Suit",
+                            "Bandana",
+                            "Tuxedo",
+                            "FOXHOUND",
+                            "VR Mission",
+                            "Snow Camo",
+                            "Desert Camo",
+                            "Normal",
+                            "Cyborg",
+                            "Ninja",
+                            "White Suit"
+                        ]
+                    },
+                    "vscode-metalgear.operativeType": {
+                        "type": "string",
+                        "enum": [
+                            "solid-snake",
+                            "cardboard-box",
+                            "genome-soldier",
+                            "gray-fox",
+                            "raiden",
+                            "metal-gear-rex"
+                        ],
+                        "default": "solid-snake",
+                        "description": "The type of operative to deploy.",
+                        "scope": "window",
+                        "enumItemLabels": [
+                            "Solid Snake",
+                            "Cardboard Box",
+                            "Genome Soldier",
+                            "Gray Fox",
+                            "Raiden",
+                            "Metal Gear REX"
+                        ]
+                    },
+                    "vscode-metalgear.operativeSize": {
+                        "type": "string",
+                        "enum": [
+                            "nano",
+                            "small",
+                            "medium",
+                            "large"
+                        ],
+                        "default": "nano",
+                        "description": "The size of the operative.",
+                        "enumItemLabels": [
+                            "Nano",
+                            "Small",
+                            "Medium",
+                            "Large"
+                        ]
+                    },
+                    "vscode-metalgear.position": {
+                        "type": "string",
+                        "enum": [
+                            "panel",
+                            "explorer"
+                        ],
+                        "default": "explorer",
+                        "description": "Where to show the operatives.",
+                        "enumItemLabels": [
+                            "Panel",
+                            "Explorer"
+                        ]
+                    },
+                    "vscode-metalgear.theme": {
+                        "type": "string",
+                        "enum": [
+                            "none",
+                            "shadow-moses",
+                            "mother-base",
+                            "big-shell",
+                            "outer-heaven"
+                        ],
+                        "default": "none",
+                        "description": "The mission location/theme.",
+                        "enumItemLabels": [
+                            "None",
+                            "Shadow Moses",
+                            "Mother Base",
+                            "Big Shell",
+                            "Outer Heaven"
+                        ]
+                    },
+                    "vscode-metalgear.throwRationWithMouse": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Throw rations with the mouse."
+                    },
+                    "vscode-metalgear.disableEffects": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Disable weather effects."
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile:panel": "webpack",
+        "compile:extension": "tsc -p ./tsconfig.extension.json",
+        "compile:test": "tsc -p ./tsconfig.test.json",
+        "compile": "npm run compile:panel && npm run compile:extension",
+        "watch": "webpack && tsc -watch -p ./tsconfig.extension.json",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/vscode": "^1.73.0",
+        "@typescript-eslint/eslint-plugin": "^5.29.0",
+        "@typescript-eslint/parser": "^5.29.0",
+        "eslint": "^8.18.0",
+        "path-browserify": "^1.0.1",
+        "process": "^0.11.10",
+        "ts-loader": "^9.3.0",
+        "typescript": "^4.7.4",
+        "webpack": "5.95.0",
+        "webpack-cli": "^4.10.0"
+    },
+    "dependencies": {}
+}
