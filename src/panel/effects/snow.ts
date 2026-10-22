@@ -17,6 +17,12 @@ interface Snowflake {
 export class SnowEffect extends Effect {
     private flakes: Snowflake[] = [];
     private readonly FLAKE_COUNT = 80;
+    private readonly snowColor: string;
+
+    constructor(snowColor: string = 'rgba(220, 235, 255, 0.9)') {
+        super();
+        this.snowColor = snowColor;
+    }
 
     init(
         foregroundCanvas: HTMLCanvasElement,
@@ -56,7 +62,7 @@ export class SnowEffect extends Effect {
 
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(220, 235, 255, 0.9)';
+            ctx.fillStyle = this.snowColor;
             this.flakes.forEach((flake) => {
                 ctx.beginPath();
                 ctx.globalAlpha = flake.opacity;

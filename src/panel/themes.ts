@@ -44,11 +44,27 @@ export class ThemeInfo {
     }
 }
 
-/** Shadow Moses — impianto nucleare, Alaska. Effetto neve. */
+/** Shadow Moses — impianto nucleare, Alaska. Sfondo bianco, neve nera. */
 class ShadowMosesThemeInfo extends ThemeInfo {
     name = 'shadow-moses';
     description = 'Shadow Moses Island — FOXHOUND nuclear facility';
-    effect = new SnowEffect();
+    effect = new SnowEffect('rgba(20, 20, 20, 0.85)');
+
+    backgroundImageUrl(
+        _basePetUri: string,
+        _themeKind: ColorThemeKind,
+        _petSize: OperativeSize,
+    ): string {
+        return 'linear-gradient(to bottom, #ffffff, #ffffff)';
+    }
+
+    foregroundImageUrl(
+        _basePetUri: string,
+        _themeKind: ColorThemeKind,
+        _petSize: OperativeSize,
+    ): string {
+        return '';
+    }
 
     floor(size: OperativeSize): number {
         switch (size) {
